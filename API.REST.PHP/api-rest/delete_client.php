@@ -1,9 +1,10 @@
 <?php
-    require_once('../includes/Client.class.php');
+require_once('../includes/Client.class.php');
 
-    if($_SERVER['REQUEST_METHOD'] == 'DELETE' 
-        && isset($_GET['id']) ){
-            Client::delete_client_by_id($_GET['id']);
-        }
-
+if ($_SERVER['REQUEST_METHOD'] == 'DELETE' && isset($_GET['id'])) {
+    Client::delete_client_by_id($_GET['id']);
+    echo json_encode(['success' => true]);
+} else {
+    echo json_encode(['success' => false]);
+}
 ?>

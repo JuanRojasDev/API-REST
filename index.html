@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Application</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>CRUD Application</h1>
+    <form id="entryForm">
+        <input type="text" id="entryInput" placeholder="Enter new entry" required>
+        <button type="submit">Add Entry</button>
+    </form>
+    <table id="entryTable">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Name</th>
+                <th>City</th>
+                <th>Telephone</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="entryList"></tbody>
+    </table>
+    <script src="script.js"></script>
+</body>
+</html>
