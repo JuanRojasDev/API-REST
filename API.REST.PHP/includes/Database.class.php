@@ -1,23 +1,24 @@
 <?php
     class Database{
-        private $host = 'localhost:5500';
-        private $user = 'test';
-        private $password = 'test';
-        private $database = 'code_pills';
+        private $host = 'shuttle.proxy.rlwy.net:42627'; 
+        private $user = 'root'; 
+        private $password; 
+        private $database = 'code_pills'; 
+
+        public function __construct() {
+            $this->password = getenv('DB_PASSWORD');
+        }
 
         public function getConnection(){
-            $hostDB = "mysql:host=".$this->host.";dbname=".$this->database.";";
+            $dsn = "mysql:host=".$this->host.";dbname=".$this->database;
 
             try{
-                $connection = new PDO($hostDB,$this->user,$this->password);
-                $connection->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+                $connection = new PDO($dsn, $this->user, $this->password);
+                $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 return $connection;
             } catch(PDOException $e){
-                die("ERROR: ".$e->getMessage());
+                echo "Connection failed: " . $e->getMessage();
             }
-
         }
     }
-
-
 ?>

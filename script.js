@@ -87,6 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fetch('API.REST.PHP/api-rest/get_all_client.php')
         .then(response => response.json())
         .then(data => {
+            console.log('Fetched data:', data); // Add this line to log the fetched data
             data.clients.forEach(entry => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `

@@ -14,9 +14,9 @@
             $stmt->bindParam(':telephone',$telephone);
 
             if($stmt->execute()){
-                header('HTTP/1.1 201 Cliente creado correctamente');
+                echo json_encode(['success' => true]);
             } else {
-                header('HTTP/1.1 404 Cliente no se ha creado correctamente');
+                echo json_encode(['success' => false, 'error' => 'Error al crear el cliente']);
             }
         }
 
@@ -27,9 +27,9 @@
             $stmt = $conn->prepare('DELETE FROM listado_clientes WHERE id=:id');
             $stmt->bindParam(':id',$id);
             if($stmt->execute()){
-                header('HTTP/1.1 201 Cliente borrad correctamente');
+                echo json_encode(['success' => true]);
             } else {
-                header('HTTP/1.1 404 Cliente no se ha podido borrar correctamente');
+                echo json_encode(['success' => false, 'error' => 'Error al eliminar el cliente']);
             }
         }
 
@@ -38,11 +38,10 @@
             $conn = $database->getConnection();
             $stmt = $conn->prepare('SELECT * FROM listado_clientes');
             if($stmt->execute()){
-                $result = $stmt->fetchAll();
-                echo json_encode($result);
-                header('HTTP/1.1 201 OK');
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                return $result;
             } else {
-                header('HTTP/1.1 404 No se ha podido consultar los clientes');
+                return [];
             }
         }
 
@@ -58,12 +57,10 @@
             $stmt->bindParam(':id',$id);
 
             if($stmt->execute()){
-                header('HTTP/1.1 201 Cliente actualizado correctamente');
+                echo json_encode(['success' => true]);
             } else {
-                header('HTTP/1.1 404 Cliente no se ha podido actualizar correctamente');
+                echo json_encode(['success' => false, 'error' => 'Error al actualizar el cliente']);
             }
-
         }
     }
-
 ?>
